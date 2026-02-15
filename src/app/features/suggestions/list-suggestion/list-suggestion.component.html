@@ -1,0 +1,50 @@
+<div class="list-suggestion-container">
+  <h1 class="page-title">Liste des suggestions</h1>
+    <button routerLink='add'  class="btn-favorite" >add sugg </button>
+  <div class="search-container">
+    <input
+      [(ngModel)] = "searchTerm"
+      type="text"
+      class="search-input"
+      placeholder="Rechercher une suggestion"
+    />
+  </div>
+
+
+
+  <div class="suggestions-list">
+    <div *ngFor="let suggestion of suggestions" >
+      <div class="suggestion-card" *ngIf ="suggestion.title.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())|| suggestion.category.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase() )">
+      <div class="card-header">
+        <h2 class="suggestion-title">
+          {{ suggestion.title }}
+        </h2>
+      </div>
+
+      <div class="card-meta">
+        <span class="category">Category: {{ suggestion.category }} </span>
+      </div>
+
+      <p class="suggestion-description">{{ suggestion.description }}</p>
+
+      <div class="card-footer">
+        <span class="status-badge" [class]="getclassByStatus(suggestion.status)">
+          {{ suggestion.status }}
+        </span>
+
+        <div *ngIf="suggestion.status != 'refusee'" class="action-buttons">
+          <button (click)="likeSuggestion(suggestion)" class="btn-like">
+            {{ suggestion.nbLikes }} likes
+          </button>
+          <button (click)="addToFavorites(suggestion)" class="btn-favorite">
+            Ajouter aux favoris
+          </button>
+  <button  class="btn-favorite" [routerLink]="['details',suggestion.id]">
+detail
+          </button> 
+       </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

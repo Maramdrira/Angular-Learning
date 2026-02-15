@@ -1,0 +1,11 @@
+.active{
+    color: green;
+}
+
+.inactive{
+    color: red;
+}
+
+.pending{
+    color: orange;
+}
