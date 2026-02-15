@@ -1,3 +1,27 @@
+<!-- 
+suggestions.component.html
+==========================
+
+This is the PARENT/SHELL component for all suggestion routes.
+
+<p>suggestions works!</p>
+-----------------------
+Static content that ALWAYS appears (shared layout/header).
+
+<router-outlet></router-outlet>
+------------------------------
+The placeholder where CHILD components render.
+
+When URL is /suggestions/list:
+- This parent component loads first
+- Then ListSuggestionComponent appears INSIDE the outlet
+
+Result:
+┌─────────────────────────┐
+│  suggestions works!     │  ← Always visible
+│  ─────────────────────  │
+│  [Child Component Here] │  ← Changes based on route
+└─────────────────────────┘
+-->
 <p>suggestions works!</p>
 <router-outlet></router-outlet>
-<!-- kol router outlet tjib fi wstha compspet we7ed  -->

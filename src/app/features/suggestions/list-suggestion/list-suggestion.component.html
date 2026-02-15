@@ -1,50 +1,75 @@
 <div class="list-suggestion-container">
   <h1 class="page-title">Liste des suggestions</h1>
-    <button routerLink='add'  class="btn-favorite" >add sugg </button>
+  
+  <!-- routerLink: Navigates to 'add' route on click -->
+  <button routerLink='add' class="btn-favorite">add sugg</button>
+  
   <div class="search-container">
+    <!-- 
+      [(ngModel)]: Two-way data binding
+      - Component → Input: Displays searchTerm value
+      - Input → Component: Updates searchTerm on every keystroke
+    -->
     <input
-      [(ngModel)] = "searchTerm"
+      [(ngModel)]="searchTerm"
       type="text"
       class="search-input"
       placeholder="Rechercher une suggestion"
     />
   </div>
 
-
-
   <div class="suggestions-list">
-    <div *ngFor="let suggestion of suggestions" >
-      <div class="suggestion-card" *ngIf ="suggestion.title.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())|| suggestion.category.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase() )">
-      <div class="card-header">
-        <h2 class="suggestion-title">
-          {{ suggestion.title }}
-        </h2>
+    <!-- *ngFor: Loops through suggestions array, creates div for each item -->
+    <div *ngFor="let suggestion of suggestions">
+      <!-- 
+        *ngIf: Conditionally renders card if search matches title or category
+        toLocaleLowerCase(): Case-insensitive search comparison
+      -->
+      <div class="suggestion-card" *ngIf="suggestion.title.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()) || suggestion.category.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())">
+        
+        <div class="card-header">
+          <!-- {{ }}: Interpolation - displays suggestion.title -->
+          <h2 class="suggestion-title">{{ suggestion.title }}</h2>
+        </div>
+
+        <div class="card-meta">
+          <span class="category">Category: {{ suggestion.category }}</span>
+        </div>
+
+        <!-- Interpolation for description -->
+        <p class="suggestion-description">{{ suggestion.description }}</p>
+
+        <div class="card-footer">
+          <!-- 
+            [class]: Property binding - dynamically applies CSS class 
+            returned by getclassByStatus() method
+          -->
+          <span class="status-badge" [class]="getclassByStatus(suggestion.status)">
+            {{ suggestion.status }}
+          </span>
+
+          <!-- *ngIf: Only shows buttons if status is NOT 'refusee' -->
+          <div *ngIf="suggestion.status != 'refusee'" class="action-buttons">
+            <!-- (click): Event binding - calls likeSuggestion() on click -->
+            <button (click)="likeSuggestion(suggestion)" class="btn-like">
+              {{ suggestion.nbLikes }} likes
+            </button>
+            
+            <!-- Event binding for addToFavorites() -->
+            <button (click)="addToFavorites(suggestion)" class="btn-favorite">
+              Ajouter aux favoris
+            </button>
+            
+            <!-- 
+              [routerLink]: Property binding with array syntax
+              Generates route: ['details', suggestion.id] → /details/123
+            -->
+            <button class="btn-favorite" [routerLink]="['details', suggestion.id]">
+              detail
+            </button>
+          </div>
+        </div>
       </div>
-
-      <div class="card-meta">
-        <span class="category">Category: {{ suggestion.category }} </span>
-      </div>
-
-      <p class="suggestion-description">{{ suggestion.description }}</p>
-
-      <div class="card-footer">
-        <span class="status-badge" [class]="getclassByStatus(suggestion.status)">
-          {{ suggestion.status }}
-        </span>
-
-        <div *ngIf="suggestion.status != 'refusee'" class="action-buttons">
-          <button (click)="likeSuggestion(suggestion)" class="btn-like">
-            {{ suggestion.nbLikes }} likes
-          </button>
-          <button (click)="addToFavorites(suggestion)" class="btn-favorite">
-            Ajouter aux favoris
-          </button>
-  <button  class="btn-favorite" [routerLink]="['details',suggestion.id]">
-detail
-          </button> 
-       </div>
-      </div>
-    </div>
     </div>
   </div>
 </div>

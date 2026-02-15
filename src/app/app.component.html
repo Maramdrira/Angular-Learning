@@ -1,4 +1,65 @@
+<!-- 
+  app.component.html (ROOT APP SHELL)
+  ===================================
+  
+  This is the MAIN layout that wraps your entire application.
+  Everything here appears on EVERY page.
+-->
+
+<!-- 
+  <app-header></app-header>
+  -------------------------
+  Component selector for your custom HeaderComponent
+  
+  - Displays navigation, logo, menu
+  - Stays visible on all routes
+  - Usually contains routerLink navigation
+  
+  Behind the scenes:
+  Angular finds HeaderComponent in declarations, renders its template here
+-->
 <app-header></app-header>
+
+<!-- 
+  <router-outlet></router-outlet>
+  -------------------------------
+  PRIMARY ROUTER OUTLET (main content area)
+  
+  This is where routed components appear based on URL:
+  
+  URL /home           → HomeComponent renders here
+  URL /suggestions    → SuggestionsComponent renders here  
+  URL /users          → UsersComponent renders here
+  URL /page-not-found → NotFoundComponent renders here
+  
+  The outlet SWAPS content - header/footer stay, middle changes!
+  
+  Visual:
+  ┌─────────────────────┐
+  │     HEADER          │  ◄── Always here
+  ├─────────────────────┤
+  │                     │
+  │   [ROUTER OUTLET]   │  ◄── Changes per route
+  │   Dynamic content   │
+  │                     │
+  ├─────────────────────┤
+  │     FOOTER          │  ◄── Always here
+  └─────────────────────┘
+-->
 <router-outlet></router-outlet>
-<app-footer></app-footer>
+
+<!-- 
+  <app-user-status></app-user-status>
+  ----------------------------------
+  Component selector for UserStatusComponent
+  -->
 <app-user-status></app-user-status>
+<!-- 
+  <app-footer></app-footer>
+  -------------------------
+  Component selector for FooterComponent
+  
+  - Static content at bottom of every page
+-->
+<app-footer></app-footer>
+

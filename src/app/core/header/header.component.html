@@ -1,11 +1,68 @@
+
 <header class="header">
   <div class="header-content">
     <div class="logo">
       <span>Campus Ideas</span>
     </div>
+    <!-- 
+      =================================================================
+      ANGULAR NAVIGATION SECTION
+      =================================================================
+      
+      Navigation container using Angular Router for SPA navigation.
+      Unlike traditional <a href=""> links, these use Angular's 
+      routerLink directive for client-side navigation without page reloads.
+    -->
     <nav class="navigation">
+      
+      <!-- 
+        ANGULAR DIRECTIVE: routerLink
+        -----------------------------------------------------------------
+        Syntax: routerLink="path"
+        
+        What it does:
+        - Binds the click event to Angular's Router service
+        - Navigates to the specified route ('home') programmatically
+        - Prevents default browser navigation (no full page reload)
+        - Updates the URL in the address bar
+        - Renders the corresponding component in <router-outlet>
+        
+        Why use it instead of href:
+        - SPA behavior: Only updates the view, doesn't reload the entire app
+        - Preserves application state
+        - Faster navigation (no HTTP request for full page)
+        - Enables browser history (back/forward buttons work)
+        
+        Behind the scenes:
+        - Angular listens for click events on this element
+        - Calls Router.navigate(['home'])
+        - Matches route in your AppRoutingModule
+        - Displays the component configured for 'home' path
+      -->
       <a routerLink="home" class="nav-link">Home</a>
+      
+      <!-- 
+        ANGULAR DIRECTIVE: routerLink (second link)
+        -----------------------------------------------------------------
+        Same functionality as above, but navigates to 'suggestions' route.
+        
+        CSS CLASS: 'active'
+        -----------------------------------------------------------------
+        This is a static CSS class indicating the current active page.
+        Note: This is hardcoded as 'active' here. 
+        
+        For DYNAMIC active state, Angular provides routerLinkActive directive:
+        
+        Example with dynamic active state:
+        <a routerLink="suggestions" 
+           routerLinkActive="active" 
+           class="nav-link">Suggestions</a>
+        
+        routerLinkActive automatically adds/removes the 'active' class 
+        based on whether the current URL matches this routerLink.
+      -->
       <a routerLink="suggestions" class="nav-link active">Suggestions</a>
+      
     </nav>
   </div>
 </header>

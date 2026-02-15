@@ -1,14 +1,20 @@
+
+// @Component: Angular decorator that marks this class as a component
+// and provides metadata about it
 import { Component } from '@angular/core';
-import { Suggestion } from '../../../models/suggestion'; // <-- correct path
+import { Suggestion } from '../../../models/suggestion'; // TypeScript type import
 
 @Component({
-  selector: 'app-list-suggestion',
-  templateUrl: 'list-suggestion.component.html',
-  styleUrls: ['list-suggestion.component.css'],
+  selector: 'app-list-suggestion',    // CSS selector to use this component: <app-list-suggestion>
+  templateUrl: 'list-suggestion.component.html',  // External HTML template file
+  styleUrls: ['list-suggestion.component.css'],   // Component-scoped styles
 })
 export class ListSuggestionComponent {
+  // Property bound to search input via [(ngModel)] - two-way binding
   searchTerm: string = '';
-  suggestions: Suggestion[] = [
+
+  // Array of suggestions displayed in template via *ngFor
+   suggestions: Suggestion[] = [
     {
       id: 1,
       title: 'Organiser une journée team building',
@@ -51,28 +57,26 @@ et reconnaître leurs efforts.`,
     },
   ];
 
+  // Array to store favorites - modified by addToFavorites()
   favorites: Suggestion[] = [];
 
+  // Method called by (click) event binding on like button
   likeSuggestion(suggestion: Suggestion) {
-    suggestion.nbLikes++;
+    suggestion.nbLikes++;  // Direct mutation - increments likes count
   }
 
+  // Method called by (click) event binding on favorite button
   addToFavorites(suggestion: Suggestion) {
-    this.favorites.push(suggestion);
+    this.favorites.push(suggestion);  // Adds suggestion to favorites array
   }
 
+  // Method called by [class] property binding to get CSS class based on status
   getclassByStatus(status: string): string {
     switch (status) {
-      case 'acceptee':
-        return 'status-accepted';
-      case 'refusee':
-        return 'status-refused';
-      case 'en_attente':
-        return 'status-pending';
-      default:
-        return '';
+      case 'acceptee':   return 'status-accepted';
+      case 'refusee':    return 'status-refused';
+      case 'en_attente': return 'status-pending';
+      default:           return '';
     }
   }
-
-  
 }

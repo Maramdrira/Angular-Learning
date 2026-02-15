@@ -1,3 +1,18 @@
+
+<!-- 1. Browser loads main.ts
+         ↓
+2. platformBrowserDynamic()
+   Creates browser platform
+         ↓
+3. .bootstrapModule(AppModule)
+   ├─ Compile AppModule
+   ├─ Setup dependency injection
+   ├─ Create AppComponent instance
+   └─ Find <app-root> in index.html
+         ↓
+4. App renders!
+   <app-root> replaced with AppComponent template -->
+    
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,3 +26,5 @@
     <app-root></app-root>
   </body>
 </html>
+
+

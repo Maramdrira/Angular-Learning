@@ -1,6 +1,30 @@
 <p>suggestion-form works!</p>
 
+<!-- 
+  [formGroup]="myForm"
+  --------------------
+  We bind the ENTIRE FormGroup object to the form.
+  Now the form has access to all controls (title, description).
+  This is ONE-TIME setup - we pass the whole group.
+  
+  Needs [ ] because "myForm" is a VARIABLE (the actual object).
+-->
+
 <form [formGroup]="myForm">
-    title : <input formControlName="title">
-    description : <textarea formControlName="description"></textarea> 
+  
+  <!-- 
+    formControlName="title"
+    -----------------------
+    The form already HAS the FormGroup from above.
+    Now we just need to tell it WHICH control to use.
+    We pass the NAME "title" as a string to look it up inside the group.
+    
+    No [ ] needed because "title" is just a STRING KEY, not a variable.
+    It's like saying: "Go find the control named 'title' in myForm"
+  -->
+  title: <input formControlName="title">
+  
+  <!-- Same: "description" is the string key to find that control -->
+  description: <textarea formControlName="description"></textarea>
+  
 </form>

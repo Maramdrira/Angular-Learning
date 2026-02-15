@@ -1,31 +1,52 @@
-<<<<<<< HEAD
-# Angular-Learning
-=======
 # AngularModulaire
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+A learning project built with **Angular 18** using the **Modular Architecture** approach.
 
-## Development server
+## Prerequisites
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Before you begin, ensure you have the following installed:
 
-## Code scaffolding
+| Requirement | Version | Download |
+|-------------|---------|----------|
+| Node.js | **v20.20.0** | [nodejs.org](https://nodejs.org/) |
+| Angular CLI | 18.2.21 | `npm install -g @angular/cli@18` |
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+> ⚠️ **Important:** This project requires **Node.js v20.20.0** exactly. Other versions may cause compatibility issues.
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## First Time Setup
 
-## Running unit tests
+Follow these steps to run the project for the **first time**:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Maramdrira/Angular-Learning.git
+cd Angular-Learning
+```
+2. Install Dependencies
+```bash
+npm install
+```
+This creates the node_modules folder with all required packages.
+3. Start the Development Server
+```bash
+ng serve --open
+```
+The --open flag automatically launches http://localhost:4200/ in your default browser.
 
-## Running end-to-end tests
+To get more help on the Angular CLI use ng help or go check out the Angular CLI Overview and Command Reference page.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+## Key Changes Made
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
->>>>>>> 822fc08 (Initial commit)
+| Section | Purpose |
+|---------|---------|
+| **Prerequisites** | Clear Node.js version requirement (v20.20.0) |
+| **First Time Setup** | Step-by-step from clone to running |
+| `npm install` | Explicitly mentioned for `node_modules` |
+| `ng serve --open` | Added `--open` flag for convenience |
+| **Angular 18 Modular** | Stated clearly for context |
+
+This helps anyone cloning the project get started immediately without guessing!
