@@ -22,9 +22,19 @@
     No [ ] needed because "title" is just a STRING KEY, not a variable.
     It's like saying: "Go find the control named 'title' in myForm"
   -->
-  title: <input formControlName="title">
+  title: <input formControlName="title">{{myForm.get('title')?.valid}}
+  <div *ngIf="myForm.get('title')?.touched && myForm.get('title')?.invalid "> Title obligatoire !</div>
   
   <!-- Same: "description" is the string key to find that control -->
   description: <textarea formControlName="description"></textarea>
+    <!-- <div *ngIf="myForm.get('description')?.touched && myForm.get('description')?.invalid "> Description obligatoire !</div> -->
+    <div *ngIf="myForm.get('description')?.errors?.['required']">oblig</div>
+    <div  *ngIf="myForm.get('description')?.errors?.['minlength']">min 3 caractères</div>
+
+<!-- 
+  {{myForm.get('description')?.touched}}
+    {{myForm.get('description')?.dirty}}
+  {{myForm.get('description')?.pristine}} -->
+
   
 </form>
