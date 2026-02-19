@@ -9,6 +9,7 @@ import { ListSuggestionComponent } from './features/suggestions/list-suggestion/
 import { UserStatusComponent } from './core/user-status/user-status.component';
 import { HomeComponent } from './core/home/home.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,7 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
     - Third-party services without Angular decorators
     - Configuring services with useClass/useValue/useFactory
   */
-  providers: [],
+  providers: [provideHttpClient()],  // Provides HttpClient service for making HTTP requests
   
   /*
     BOOTSTRAP

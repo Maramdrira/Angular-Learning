@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';  // Reactive Forms classes
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';  // Reactive Forms classes
 import { Title } from '@angular/platform-browser';  // Service to set page title (not used here)
+import { Suggestion } from '../../../models/suggestion';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-suggestion-form',
@@ -14,7 +16,24 @@ export class SuggestionFormComponent implements OnInit {
     - Provides methods: .value, .valid, .reset(), etc.
     - The '!' (definite assignment) tells TypeScript it will be initialized in ngOnInit
   */
+
+ constructor(private fb: FormBuilder , private _myroute:Router) {}  // Inject FormBuilder for easier form creation
+
   myForm!: FormGroup;
+  myForm2!: FormGroup;
+  id!: number;
+  categories: string[] = [
+  'Infrastructure et bâtiments',
+  'Technologie et services numériques',
+  'Restauration et cafétéria',
+  'Hygiène et environnement',
+  'Transport et mobilité',
+  'Activités et événements',
+  'Sécurité',
+  'Communication interne',
+  'Accessibilité',
+  'Autre'
+  ];
 
   ngOnInit() {
     /*
@@ -44,7 +63,7 @@ export class SuggestionFormComponent implements OnInit {
         - dirty/pristine: if value changed
         - errors: validation error messages
       */
-      title: new FormControl("test", Validators.required),
+      title: new FormControl("test", [Validators.required, Validators.minLength(5),Validators.pattern("^[A-Z][a-z]*")]),  // Required, min 3 chars, alphanumeric only
       
       /*
         MULTIPLE VALIDATORS (array syntax)
@@ -61,7 +80,37 @@ export class SuggestionFormComponent implements OnInit {
         - Validators.pattern(regex)
         - Validators.min(n) / Validators.max(n)
       */
-      description: new FormControl("", [Validators.required,Validators.minLength(3)]),
+      description: new FormControl("", [Validators.required,Validators.minLength(30)]),
+      category: new FormControl("",Validators.required),
+      status: new FormControl("en_attente"),
+      date: new FormControl(new Date().toISOString().substring(0, 10))  // Default to today's date in YYYY-MM-DD format
+
     });
+
+
+
+    //bel form builder 
+  this.myForm2=this.fb.group({
+  title: ["", [Validators.required, Validators.minLength(5),Validators.pattern("^[A-Z][a-z]*")]],
+  description: ["", [Validators.required,Validators.minLength(30)]]});
   }
+
+//getter fi for m contorl nsamih kima nhb  w twali tjininm fel html tbdel myForm.get('title')?.touched   b title?.touched  bech ken bdalt esm el chanp madrourech 3lihom lkol 
+  get title() {
+    return this.myForm.get('title');
+  }
+
+  onSubmit() {
+    let s = new Suggestion();
+    s.title = this.title?.value; // Get title value from form control
+    s.description = this.myForm.value.description;
+    console.log(this.myForm.value);  // Log form values to console on submit
+this._myroute.navigateByUrl('/suggestions/list'); //redirect to list after submission
+
+  }
+
+
+
+
+
 }
