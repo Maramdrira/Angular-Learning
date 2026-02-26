@@ -3,18 +3,20 @@
 // and provides metadata about it
 import { Component } from '@angular/core';
 import { Suggestion } from '../../../models/suggestion'; // TypeScript type import
+import { SuggestionService } from '../../../services/suggestion.service';
 
 @Component({
   selector: 'app-list-suggestion',    // CSS selector to use this component: <app-list-suggestion>
   templateUrl: 'list-suggestion.component.html',  // External HTML template file
   styleUrls: ['list-suggestion.component.css'],   // Component-scoped styles
+// providers: [SuggestionService] => disponible uniquement pour ce composant
 })
 export class ListSuggestionComponent {
   // Property bound to search input via [(ngModel)] - two-way binding
   searchTerm: string = '';
 
   // Array of suggestions displayed in template via *ngFor
-   suggestions: Suggestion[] = [
+  /* suggestions: Suggestion[] = [
     {
       id: 1,
       title: 'Organiser une journée team building',
@@ -55,7 +57,24 @@ et reconnaître leurs efforts.`,
       status: 'en_attente',
       nbLikes: 0,
     },
-  ];
+  ];*/
+
+
+  constructor(private sugService:SuggestionService){}
+ngOnInit(){
+  this.sugService.getSuggestionsFromBackend().subscribe({
+    next: (res) => {
+      this.suggestions = res;
+      console.log('GET - Liste des suggestions:', res);
+    },
+    error: (err) => console.error('Erreur:', err)
+  });
+  
+ 
+}
+  
+
+   suggestions: Suggestion[] = []; // Initialized as empty, will be populated from backend
 
   // Array to store favorites - modified by addToFavorites()
   favorites: Suggestion[] = [];

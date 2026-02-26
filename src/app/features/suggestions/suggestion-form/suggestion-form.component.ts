@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';  // Reactive Forms classes
 import { Suggestion } from '../../../models/suggestion';
 import { Router } from '@angular/router';  // Service for programmatic navigation
+import { SuggestionService } from '../../../services/suggestion.service';
 
 @Component({
   selector: 'app-suggestion-form',
@@ -30,7 +31,7 @@ export class SuggestionFormComponent implements OnInit {
     'Accessibilité',
     'Autre'
   ];
-
+  
   /*
     CONSTRUCTOR - DEPENDENCY INJECTION
     =================================================================
@@ -52,7 +53,7 @@ export class SuggestionFormComponent implements OnInit {
     - Convention for private properties
     - Distinguishes from public methods
   */
-  constructor(private fb: FormBuilder, private _myroute: Router) {}
+  constructor(private fb: FormBuilder, private _myroute: Router , private sug:SuggestionService) {}
 
   ngOnInit() {
     /*
@@ -156,8 +157,22 @@ export class SuggestionFormComponent implements OnInit {
       
       Same rule applies: ['/suggestions'] = absolute, ['suggestions'] = relative
     */
-    this._myroute.navigateByUrl('/suggestions/list');
-  }
+
+
+this.sug.addSuggestion(this.myForm.value).subscribe(
+    {
+      next: (res) => console.log('POST - Suggestion ajoutée:', res),
+      error: (err) => console.error('Erreur:', err),
+      complete:()=>this._myroute.navigateByUrl("/suggestions")
+    }
+
+);
+
+}
+  
+       
+    // this._myroute.navigateByUrl('/suggestions/list');  5tetr lena 7atta ken ajou masarech yhzech 
+    }
 
 
   /* 
@@ -174,4 +189,3 @@ export class SuggestionFormComponent implements OnInit {
     Validators.email              // Valid email format
     Validators.pattern(/regex/)   // Match regex pattern
 // */
-}
